@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> / <a href="{{ url_for('services') }}">Services</a> / {{ s.short }}</p>
+    <h1>{{ s.name }}</h1>
+    <p class="lead">{{ s.desc }}</p>
+  </div>
+</div>
+<section>
+  <div class="wrap detail-grid">
+    <div>
+      <h2>Overview</h2>
+      <p>{{ s.overview }}</p>
+
+      <h2>What's covered</h2>
+      <ul class="check-list">
+        {% for item in s.whatweTest %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+
+      <h2>Our approach</h2>
+      <p>{{ s.approach }}</p>
+
+      <h2>Who this is for</h2>
+      <p>{{ s.idealFor }}</p>
+
+      <h2>What you get</h2>
+      <p>{{ s.deliverable }}</p>
+    </div>
+    <div class="side-card">
+      <h4>Get in touch</h4>
+      <p style="font-size:14px;color:var(--slate);margin-bottom:18px;">Tell us about your setup and we'll recommend the right scope for {{ s.short }} — no pricing posted here, every engagement gets a custom quote after a quick call.</p>
+      <a href="{{ url_for('contact') }}" class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:24px;">Request a Quote</a>
+      <h4>Related services</h4>
+      <div class="related-list">
+        {% for o in related %}
+        <a href="{{ url_for('service_detail', slug=o.slug) }}">{{ o.short }} →</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Ready to get started with {{ s.short }}?</h2>
+    <p>Book a free consult — we'll scope it and send a custom quote.</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-primary">Get a Free Consult →</a>
+  </div>
+</div>
+{% endblock %}

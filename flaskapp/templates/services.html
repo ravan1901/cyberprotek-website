@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> / Services</p>
+    <h1>Seven services, one accountable team</h1>
+    <p class="lead">Security testing, infrastructure, support, and the web — everything your business's IT needs, from one team that answers the phone.</p>
+  </div>
+</div>
+<section>
+  <div class="wrap">
+    <div class="services-grid">
+      {% for s in all_services %}
+      <a href="{{ url_for('service_detail', slug=s.slug) }}" class="svc-card {{ 'featured' if s.slug=='vapt' else '' }}">
+        <div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ '#0F1B2A' if s.slug=='vapt' else '#F7F8F6' }}" stroke-width="2">{{ s.icon|safe }}</svg></div>
+        {% if s.slug=='vapt' %}<span class="svc-tag">{{ s.tag }}</span>{% endif %}
+        <h3>{{ s.name }}</h3>
+        <p>{{ s.desc }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Not sure which service you need?</h2>
+    <p>Tell us what's going on — we'll point you to the right starting point.</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-primary">Talk to Us →</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> / Contact</p>
+    <h1>Let's find out what's actually exposed.</h1>
+    <p class="lead">Reach out for a free 20-minute consult — no obligation, no sales pitch, just a clear view of where you stand.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap contact-grid">
+    <div>
+      <div class="contact-card">
+        <h4>Email</h4>
+        <a href="mailto:info@cyberprotek.in">info@cyberprotek.in</a>
+      </div>
+      <div class="contact-card">
+        <h4>Phone</h4>
+        <a href="tel:+917069662848">Krishna Kaloliya — +91 70696 62848</a>
+        <br><br>
+        <a href="tel:+919265399605">Gunjan Dave — +91 92653 99605</a>
+      </div>
+      <div class="contact-card">
+        <h4>Office hours</h4>
+        <p style="font-size:14.5px;color:var(--slate);margin-top:4px;">Mon–Sat, 9:30 AM – 7:00 PM IST<br>Critical AMC support: 24/7</p>
+      </div>
+    </div>
+    <div>
+      {% if submitted %}
+      <div class="contact-card" style="border-color:var(--green);">
+        <h4 style="color:var(--green);">Message sent</h4>
+        <p style="font-size:15px;color:var(--navy);margin-top:6px;">Thanks {{ submitted.name }} — we'll get back to you at {{ submitted.email }} shortly.</p>
+      </div>
+      {% endif %}
+      <form method="POST" action="{{ url_for('contact') }}" class="contact-card" style="display:block;">
+        <h4 style="margin-bottom:18px;">Send us a message</h4>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:13px;color:var(--slate);margin-bottom:6px;">Name</label>
+          <input type="text" name="name" required style="width:100%;padding:10px 12px;border:1px solid var(--line-dark);border-radius:4px;font-size:14px;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:13px;color:var(--slate);margin-bottom:6px;">Email</label>
+          <input type="email" name="email" required style="width:100%;padding:10px 12px;border:1px solid var(--line-dark);border-radius:4px;font-size:14px;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:13px;color:var(--slate);margin-bottom:6px;">Which service?</label>
+          <select name="service" style="width:100%;padding:10px 12px;border:1px solid var(--line-dark);border-radius:4px;font-size:14px;">
+            <option value="">Not sure / general inquiry</option>
+            {% for s in all_services %}
+            <option value="{{ s.slug }}">{{ s.short }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div style="margin-bottom:18px;">
+          <label style="display:block;font-size:13px;color:var(--slate);margin-bottom:6px;">Message</label>
+          <textarea name="message" rows="4" required style="width:100%;padding:10px 12px;border:1px solid var(--line-dark);border-radius:4px;font-size:14px;font-family:inherit;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

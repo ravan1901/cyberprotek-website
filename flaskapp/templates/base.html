@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="{{ url_for('home') }}" class="logo">
+      <img src="{{ url_for('static', filename='images/logo.png') }}"
+     alt="Cyberprotek logo"
+     style="height:52px;width:auto;display:block;">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="{{ url_for('home') }}" class="{{ 'active' if active=='home' else '' }}">Home</a>
+      <div class="has-dropdown" id="servicesDropdown">
+        <a href="{{ url_for('services') }}" class="{{ 'active' if active=='services' else '' }}" onclick="if(window.innerWidth<=860){event.preventDefault();document.getElementById('servicesDropdown').classList.toggle('mobile-dropdown-open');}">Services ▾</a>
+        <div class="dropdown">
+          {% for s in all_services %}
+          <a href="{{ url_for('service_detail', slug=s.slug) }}">{{ s.short }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <a href="{{ url_for('about') }}" class="{{ 'active' if active=='about' else '' }}">About</a>
+      <a href="{{ url_for('contact') }}" class="{{ 'active' if active=='contact' else '' }}">Contact</a>
+      <a href="{{ url_for('contact') }}" class="nav-cta mobile-cta" style="display:none;">Get a Free Consult</a>
+    </div>
+    <a href="{{ url_for('contact') }}" class="nav-cta">Get a Free Consult</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="var n=document.getElementById('navLinks');n.classList.toggle('mobile-open');this.textContent=n.classList.contains('mobile-open')?'✕':'☰';">☰</button>
+  </nav>
+</header>
+
+<style>
+@media (max-width:860px){
+  .mobile-cta{display:block !important;margin-top:10px;text-align:center;}
+}
+</style>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:12px;">
+          <img src="{{ url_for('static', filename='images/logo.png') }}"
+     alt="Cyberprotek logo"
+     style="height:52px;width:auto;display:block;">
+        </div>
+        <p style="max-width:280px;color:#7E8B98;">Full-stack IT services and security testing for businesses that can't afford a guess.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        {% for s in all_services %}
+        <a href="{{ url_for('service_detail', slug=s.slug) }}">{{ s.short }}</a>
+        {% endfor %}
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('services') }}">All Services</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p style="color:#9AA6B2;padding:4px 0;">Ahmedabad, Gujarat, India</p>
+        <a href="mailto:info@cyberprotek.in">info@cyberprotek.in</a>
+        <a href="tel:+917069662848">Krishna Kaloliya — +91 70696 62848</a>
+        <a href="tel:+919265399605">Gunjan Dave — +91 92653 99605</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Cyberprotek. All rights reserved.</span>
+      <span>Built for SMBs who take security seriously.</span>
+    </div>
+  </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const menuBtn = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('mobile-open');
+    });
+
+    if (window.innerWidth <= 860) {
+
+        const serviceLink = document.querySelector('.has-dropdown > a');
+        const dropdownParent = document.querySelector('.has-dropdown');
+
+        serviceLink.addEventListener('click', function(e) {
+
+            e.preventDefault();
+
+            dropdownParent.classList.toggle('mobile-dropdown-open');
+
+        });
+    }
+
+});
+</script>
+</body>
+</html>

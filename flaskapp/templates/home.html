@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero" style="background:linear-gradient(135deg,#0B1F4D 0%,#163E8C 55%,#1E5FE0 100%);color:var(--off);padding:90px 0 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(61,139,255,0.35),transparent 70%);pointer-events:none;"></div>
+  <div class="wrap hero-split">
+    <div>
+      <p class="eyebrow">Your Trusted Partner for Smart, Secure & Scalable IT</p>
+      <h1 class="hero-title" style="margin:18px 0 20px;color:var(--off);">Your systems, <span style="color:var(--blue-light);">protected</span><br>and supported — end to end.</h1>
+      <p style="font-size:17px;color:#C7D6F2;max-width:480px;margin-bottom:30px;">We help businesses build strong, secure, and future-ready IT infrastructure with innovative and reliable technology solutions — from penetration testing to day-to-day support.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="{{ url_for('contact') }}" class="btn btn-primary">Let's Work Together →</a>
+        <a href="{{ url_for('services') }}" class="btn btn-ghost">See Our Services</a>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;position:relative;">
+      <svg width="100%" height="380" viewBox="0 0 320 320" style="max-width:340px;">
+        <circle cx="160" cy="170" r="140" fill="none" stroke="rgba(61,139,255,0.25)" stroke-width="1.5"/>
+        <circle cx="160" cy="170" r="100" fill="none" stroke="rgba(61,139,255,0.18)" stroke-width="1.5"/>
+        <ellipse cx="160" cy="290" rx="95" ry="16" fill="#0A1A40"/>
+        <ellipse cx="160" cy="284" rx="95" ry="16" fill="#142B5C"/>
+        <ellipse cx="160" cy="278" rx="70" ry="11" fill="#1E5FE0" opacity="0.7"/>
+        <path d="M160 40 L235 70 L235 160 C235 215 200 250 160 270 C120 250 85 215 85 160 L85 70 Z" fill="#1E5FE0"/>
+        <path d="M160 40 L235 70 L235 160 C235 215 200 250 160 270 Z" fill="#3D8BFF" opacity="0.55"/>
+        <path d="M160 55 L222 80 L222 158 C222 205 192 235 160 253 C128 235 98 205 98 158 L98 80 Z" fill="#0B1F4D"/>
+        <rect x="133" y="150" width="54" height="46" rx="6" fill="#F7F9FC"/>
+        <path d="M143 150 v-16 a17 17 0 0134 0 v16" fill="none" stroke="#F7F9FC" stroke-width="9"/>
+        <circle cx="160" cy="170" r="6" fill="#1E5FE0"/>
+        <rect x="157" y="170" width="6" height="14" fill="#1E5FE0"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div style="background:var(--navy);text-align:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <p style="color:var(--off);font-family:'Space Grotesk',sans-serif;font-size:16px;letter-spacing:0.04em;">
+    <span style="color:var(--blue-light);font-weight:700;">SECURE</span> TODAY,
+    <span style="color:var(--blue-light);font-weight:700;">SAFE</span> TOMORROW
+  </p>
+</div>
+
+<section style="padding:70px 0 50px;">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 46px;text-align:center;">
+      <p class="eyebrow" style="justify-content:center;">What we deliver</p>
+      <h2>We help businesses to</h2>
+    </div>
+    <div class="services-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="svc-card" style="text-align:center;">
+        <div class="svc-icon" style="margin:0 auto 18px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F9FC" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h3>Stay audit-ready</h3>
+        <p>Clear documentation and security controls so compliance reviews and client due-diligence checks are a formality, not a scramble.</p>
+      </div>
+      <div class="svc-card" style="text-align:center;">
+        <div class="svc-icon" style="margin:0 auto 18px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F9FC" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Get attack-ready</h3>
+        <p>Practiced response plans and hardened systems, so a real incident is something your team has already rehearsed for.</p>
+      </div>
+      <div class="svc-card" style="text-align:center;">
+        <div class="svc-icon" style="margin:0 auto 18px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F9FC" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg></div>
+        <h3>Keep data protected</h3>
+        <p>Access controls, encryption, and monitoring tuned to what actually matters in your environment, not a generic checklist.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--line-dark);">
+  <div class="wrap two-col-60">
+    <div>
+      <p class="eyebrow">About Cyberprotek</p>
+      <h2 style="font-size:30px;margin:14px 0 18px;">Built to be the IT team SMBs usually can't afford to hire</h2>
+      <p style="color:var(--slate);font-size:15.5px;margin-bottom:24px;">From a small founding team to a full-stack IT and security partner, Cyberprotek has grown around one idea: every business deserves the same level of protection as an enterprise, without the enterprise overhead.</p>
+      <div class="stat-grid-2">
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;color:var(--blue);font-weight:700;">7+</div>
+          <p style="font-size:13.5px;color:var(--slate);">Service lines under one roof</p>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;color:var(--blue);font-weight:700;">100%</div>
+          <p style="font-size:13.5px;color:var(--slate);">Fixes re-verified, not assumed</p>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;color:var(--blue);font-weight:700;">8</div>
+          <p style="font-size:13.5px;color:var(--slate);">Industries actively served</p>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;color:var(--blue);font-weight:700;">24/7</div>
+          <p style="font-size:13.5px;color:var(--slate);">Critical AMC support coverage</p>
+        </div>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,#0B1F4D,#1E5FE0);border-radius:10px;height:340px;display:flex;align-items:center;justify-content:center;">
+      <svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="#F7F9FC" stroke-width="1.4" opacity="0.85"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;">
+  <div class="wrap" style="max-width:780px;text-align:center;">
+    <p class="eyebrow" style="justify-content:center;">Where we work</p>
+    <h2 style="font-size:28px;margin:14px 0 26px;">Industries we serve</h2>
+    <div class="industries-row" style="justify-content:center;">
+      <span class="chip">FinTech</span><span class="chip">Healthcare</span><span class="chip">E-commerce</span>
+      <span class="chip">SaaS Startups</span><span class="chip">Manufacturing</span><span class="chip">Education</span>
+      <span class="chip">Logistics</span><span class="chip">Retail Chains</span>
+    </div>
+  </div>
+</section>
+
+<section class="lifecycle">
+  <div class="wrap">
+    <div class="section-head light-on-dark">
+      <p class="eyebrow">How an engagement runs</p>
+      <h2>Recon → Exploit → Report → Fix</h2>
+      <p>Every security engagement follows this real sequence — not a marketing framework, the actual order work happens in.</p>
+    </div>
+    <div class="stage-track">
+      <div class="stage"><div class="stage-num">01</div><h3>Recon</h3><p>We map your attack surface before touching anything live.</p></div>
+      <div class="stage"><div class="stage-num">02</div><h3>Exploit</h3><p>Controlled, scoped attempts to actually exploit weaknesses.</p></div>
+      <div class="stage"><div class="stage-num">03</div><h3>Report</h3><p>A clear, severity-ranked report your team can act on.</p></div>
+      <div class="stage"><div class="stage-num">04</div><h3>Fix</h3><p>We help remediate, then re-test to confirm it holds.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Our Services</p>
+      <h2>Seven services, one accountable team</h2>
+      <p>From the first security audit to day-to-day IT support, Cyberprotek covers the full stack so you're not juggling five vendors.</p>
+    </div>
+    <div class="services-grid">
+      {% for s in all_services %}
+      <a href="{{ url_for('service_detail', slug=s.slug) }}" class="svc-card {{ 'featured' if s.slug=='vapt' else '' }}">
+        <div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ '#0B1F4D' if s.slug=='vapt' else '#F7F9FC' }}" stroke-width="2">{{ s.icon|safe }}</svg></div>
+        {% if s.slug=='vapt' %}<span class="svc-tag">{{ s.tag }}</span>{% endif %}
+        <h3>{{ s.name }}</h3>
+        <p>{{ s.desc }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--line-dark);">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 40px;text-align:center;">
+      <p class="eyebrow" style="justify-content:center;">Meet the team</p>
+      <h2>Who you'll actually work with</h2>
+    </div>
+    <div class="team-grid-2">
+      <div class="contact-card" style="text-align:center;margin-bottom:0;">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0B1F4D,#1E5FE0);margin:0 auto 14px;"></div>
+        <h4 style="margin-bottom:2px;">Founder</h4>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--navy);font-weight:600;margin-bottom:4px;">Krishna Kaloliya</p>
+        <p style="font-size:13.5px;color:var(--slate);margin-bottom:12px;">Leads security engagements & client strategy</p>
+        <a href="tel:+917069662848" style="font-size:14px;">+91 70696 62848</a>
+      </div>
+      <div class="contact-card" style="text-align:center;margin-bottom:0;">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0B1F4D,#1E5FE0);margin:0 auto 14px;"></div>
+        <h4 style="margin-bottom:2px;">Co-Founder</h4>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--navy);font-weight:600;margin-bottom:4px;">Gunjan Dave</p>
+        <p style="font-size:13.5px;color:var(--slate);margin-bottom:12px;">Leads infrastructure, support & delivery</p>
+        <a href="tel:+919265399605" style="font-size:14px;">+91 92653 99605</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:30px;">
+      <a href="{{ url_for('about') }}" class="btn btn-ghost-dark">More About Us →</a>
+    </div>
+  </div>
+</section>
+
+<section class="why-band-bg" style="background:#F4F7FC;">
+  <div class="wrap" style="max-width:720px;text-align:center;">
+    <p class="eyebrow" style="justify-content:center;">Testimonials</p>
+    <h2 style="font-size:28px;margin:14px 0 22px;">You focus on your business. We'll watch the risk.</h2>
+    <p style="color:var(--slate);font-size:15px;">Client testimonials will be added here as engagements complete — every report and re-test we deliver becomes the proof.</p>
+  </div>
+</section>
+
+<div class="why-band">
+  <div class="wrap why-grid">
+    <div class="why-item"><div class="why-num">✓</div><h4>Experienced Professionals</h4><p>Certified specialists across security, networks, and infrastructure.</p></div>
+    <div class="why-item"><div class="why-num">🔒</div><h4>Reliable & Secure Solutions</h4><p>Security built into every engagement by default, not bolted on after.</p></div>
+    <div class="why-item"><div class="why-num">🎧</div><h4>Customer Focused Support</h4><p>One accountable team you can actually reach when it matters.</p></div>
+    <div class="why-item"><div class="why-num">📈</div><h4>Innovative & Scalable Approach</h4><p>Solutions that grow with you, not boxed into a rigid package.</p></div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Ready to find out what's actually exposed?</h2>
+    <p>Book a free 20-minute consult — no obligation, just a clear view of where you stand.</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-primary">Let's Work Together →</a>
+  </div>
+</div>
+{% endblock %}

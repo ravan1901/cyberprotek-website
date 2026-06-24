@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> / About</p>
+    <h1>Security and IT, run by people who'll pick up the phone.</h1>
+    <p class="lead">Cyberprotek started with a simple frustration: SMBs were stuck choosing between enterprise vendors who didn't return calls, or freelancers who disappeared after launch.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap" style="max-width:760px;">
+    <p class="eyebrow">Our story</p>
+    <h2 style="font-size:30px;margin:14px 0 18px;">Why we started this</h2>
+    <p style="color:var(--slate);font-size:15.5px;margin-bottom:16px;">Most growing businesses can't justify a full in-house IT and security team, but they're exposed to exactly the same risks as larger companies — the same attackers, the same compliance pressure, the same downtime cost. We built Cyberprotek to be that team, on a budget and a timeline that actually fits an SMB.</p>
+    <p style="color:var(--slate);font-size:15.5px;">We cover the full stack — testing, networks, servers, cameras, support, and the web — so a client never has to manage five vendors to keep one business running.</p>
+  </div>
+</section>
+
+<section class="why-band" style="padding:70px 0;">
+  <div class="wrap">
+    <p class="eyebrow">What we stand for</p>
+    <h2 style="font-size:30px;margin:14px 0 36px;">How we work</h2>
+    <div class="why-grid" style="border:1px solid var(--line-dark);border-radius:8px;">
+      <div class="why-item"><h4>Custom-scoped engagements</h4><p>Every project is scoped to your setup — no generic one-size-fits-all packages.</p></div>
+      <div class="why-item"><h4>Plain-language reports</h4><p>Findings explained so non-technical leadership understands the risk too.</p></div>
+      <div class="why-item"><h4>Re-test included</h4><p>We verify fixes actually hold before calling an engagement closed.</p></div>
+      <div class="why-item"><h4>One point of contact</h4><p>You deal with the same team end to end, not a rotating roster.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:900px;">
+    <p class="eyebrow">Who you'll work with</p>
+    <h2 style="font-size:30px;margin:14px 0 36px;">Leadership</h2>
+    <div class="team-grid-2">
+      <div class="contact-card" style="margin-bottom:0;">
+        <h4>Founder</h4>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:19px;color:var(--navy);margin:6px 0 4px;font-weight:600;">Krishna Kaloliya</p>
+        <p style="font-size:14px;color:var(--slate);margin-bottom:14px;">Leads security engagements and client strategy.</p>
+        <a href="tel:+917069662848" style="font-size:15px;">+91 70696 62848</a>
+      </div>
+      <div class="contact-card" style="margin-bottom:0;">
+        <h4>Co-Founder</h4>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:19px;color:var(--navy);margin:6px 0 4px;font-weight:600;">Gunjan Dave</p>
+        <p style="font-size:14px;color:var(--slate);margin-bottom:14px;">Leads infrastructure, support, and delivery operations.</p>
+        <a href="tel:+919265399605" style="font-size:15px;">+91 92653 99605</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lifecycle">
+  <div class="wrap">
+    <div class="section-head light-on-dark">
+      <p class="eyebrow">How we deliver</p>
+      <h2>From first call to closed engagement</h2>
+      <p>The same accountable process runs across every service we offer, not just VAPT.</p>
+    </div>
+    <div class="stage-track">
+      <div class="stage"><div class="stage-num">01</div><h3>Discovery Call</h3><p>We learn your setup, constraints, and what's actually at risk before proposing anything.</p></div>
+      <div class="stage"><div class="stage-num">02</div><h3>Custom Scope</h3><p>A written scope tailored to your environment — not a templated package.</p></div>
+      <div class="stage"><div class="stage-num">03</div><h3>Delivery</h3><p>Work is carried out with regular updates, not a black box until the end.</p></div>
+      <div class="stage"><div class="stage-num">04</div><h3>Verify & Support</h3><p>We confirm the outcome holds, and stay reachable after the engagement closes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:760px;">
+    <p class="eyebrow">Where we work</p>
+    <h2 style="font-size:30px;margin:14px 0 30px;">Industries we serve</h2>
+    <div class="industries-row">
+      <span class="chip">FinTech</span><span class="chip">Healthcare</span><span class="chip">E-commerce</span>
+      <span class="chip">SaaS Startups</span><span class="chip">Manufacturing</span><span class="chip">Education</span>
+      <span class="chip">Logistics</span><span class="chip">Retail Chains</span>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Want to know where you actually stand?</h2>
+    <p>A free consult is the fastest way to find out.</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-primary">Get a Free Consult →</a>
+  </div>
+</div>
+{% endblock %}
