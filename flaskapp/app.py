@@ -2,32 +2,31 @@ from flask import Flask, render_template, request, redirect, url_for
 import csv
 import os
 import smtplib
+import re
 from email.mime.text import MIMEText
 from datetime import datetime
 
 app = Flask(__name__)
 
 MESSAGES_FILE = os.path.join(os.path.dirname(__file__), "messages.csv")
-
-# Inquiries are sent to this address. Configure SMTP credentials via
-# environment variables (see README.md) to enable actual email sending.
 NOTIFY_EMAIL = "info@cyberprotek.in"
 SMTP_HOST = os.environ.get("SMTP_HOST", "")
-SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "587")) if os.environ.get("SMTP_PORT") else 587
 SMTP_USER = os.environ.get("SMTP_USER", "")
 SMTP_PASS = os.environ.get("SMTP_PASS", "")
 
+EMAIL_REGEX = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+PHONE_REGEX = r'^(\+91[\-\s]?)?[0-9]{10}$'
 
-def send_inquiry_email(name, email, service, message):
-    """Send the inquiry to NOTIFY_EMAIL via SMTP. Silently skips if SMTP
-    credentials aren't configured, so the form still works (saves to CSV)
-    even before email sending is set up."""
+
+def send_inquiry_email(name, email, phone, service, message):
     if not (SMTP_HOST and SMTP_USER and SMTP_PASS):
         return False
     body = (
         f"New inquiry from the Cyberprotek website:\n\n"
         f"Name: {name}\n"
         f"Email: {email}\n"
+        f"Phone: {phone}\n"
         f"Service of interest: {service or 'General inquiry'}\n\n"
         f"Message:\n{message}\n"
     )
@@ -43,8 +42,9 @@ def send_inquiry_email(name, email, service, message):
             server.sendmail(SMTP_USER, [NOTIFY_EMAIL], msg.as_string())
         return True
     except Exception as e:
-        print(f"[email] Failed to send inquiry email: {e}")
+        print(f"[email] Failed to send: {e}")
         return False
+
 
 SERVICES = [
     {"slug": "vapt", "name": "VAPT — Vulnerability Assessment & Penetration Testing", "short": "VAPT",
@@ -113,7 +113,6 @@ SERVICES_BY_SLUG = {s["slug"]: s for s in SERVICES}
 
 @app.context_processor
 def inject_globals():
-    """Makes all_services available in every template automatically."""
     return {"all_services": SERVICES}
 
 
@@ -151,25 +150,33 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     submitted = None
+    error_msg = None
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip()
+        phone = request.form.get("phone", "").strip()
         service = request.form.get("service", "")
         message = request.form.get("message", "").strip()
 
-        if name and email and message:
+        if not name or not email or not phone or not message:
+            error_msg = "All fields are required."
+        elif not re.match(EMAIL_REGEX, email):
+            error_msg = "Please enter a valid email address."
+        elif not re.match(PHONE_REGEX, phone):
+            error_msg = "Please enter a valid 10-digit phone number."
+        else:
             file_exists = os.path.isfile(MESSAGES_FILE)
             with open(MESSAGES_FILE, "a", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
                 if not file_exists:
-                    writer.writerow(["timestamp", "name", "email", "service", "message"])
-                writer.writerow([datetime.now().isoformat(timespec="seconds"), name, email, service, message])
-            send_inquiry_email(name, email, service, message)
+                    writer.writerow(["timestamp", "name", "email", "phone", "service", "message"])
+                writer.writerow([datetime.now().isoformat(timespec="seconds"), name, email, phone, service, message])
+            send_inquiry_email(name, email, phone, service, message)
             submitted = {"name": name, "email": email}
 
     return render_template("contact.html", title="Contact — Cyberprotek",
                             description="Get in touch with Cyberprotek for a free consult.",
-                            active="contact", submitted=submitted)
+                            active="contact", submitted=submitted, error_msg=error_msg)
 
 
 if __name__ == "__main__":

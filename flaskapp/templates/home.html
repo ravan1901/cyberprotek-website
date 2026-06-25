@@ -1,5 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
+
+<!-- Custom responsive styling overrides to keep desktop styles and fix mobile resolutions -->
+<style>
+  /* Base Desktop Grid configuration for Deliverables */
+  .deliver-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* Responsive breakpoints for mobile devices */
+  @media (max-width: 860px) {
+    /* Stack 'We help businesses to' cards vertically on mobile */
+    .deliver-grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px;
+    }
+
+    /* Stack Hero split layout elements */
+    .hero-split {
+      flex-direction: column !important;
+      text-align: center;
+    }
+    .hero-split > div {
+      width: 100% !important;
+    }
+    .hero-split svg {
+      margin-top: 40px;
+      max-width: 280px;
+    }
+
+    /* Stack standard grid elements */
+    .two-col-60, .stat-grid-2, .team-grid-2 {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+  }
+</style>
+
 <section class="hero" style="background:linear-gradient(135deg,#0B1F4D 0%,#163E8C 55%,#1E5FE0 100%);color:var(--off);padding:90px 0 80px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(61,139,255,0.35),transparent 70%);pointer-events:none;"></div>
   <div class="wrap hero-split">
@@ -44,7 +83,8 @@
       <p class="eyebrow" style="justify-content:center;">What we deliver</p>
       <h2>We help businesses to</h2>
     </div>
-    <div class="services-grid" style="grid-template-columns:repeat(3,1fr);">
+    <!-- Responsive grid class replaces the static inline grid-template style -->
+    <div class="deliver-grid">
       <div class="svc-card" style="text-align:center;">
         <div class="svc-icon" style="margin:0 auto 18px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F9FC" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
         <h3>Stay audit-ready</h3>
