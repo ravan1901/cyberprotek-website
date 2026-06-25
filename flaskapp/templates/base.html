@@ -1,24 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title }}</title>
-<meta name="description" content="{{ description }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0H1DYP19Q8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-0H1DYP19Q8');
+  </script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Mobile Resolution Optimization Styles -->
+  <style>
+    /* Global resets to prevent horizontal scrolling on mobile */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    /* Prevent logo overflow on small displays */
+    header nav .logo img, footer .logo img {
+      max-width: 100%;
+      height: auto !important;
+      max-height: 46px; 
+    }
+
+    @media (max-width: 860px) {
+      /* Mobile Call to Action button adjustment */
+      .mobile-cta {
+        display: block !important;
+        margin-top: 15px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      /* Vertical menu expansion settings for mobile */
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #0B1F4D; 
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 999;
+      }
+      
+      .nav-links.mobile-open {
+        display: flex !important;
+      }
+
+      /* Mobile submenu dropdown mechanics */
+      .dropdown {
+        display: none;
+        padding-left: 15px;
+      }
+      
+      .mobile-dropdown-open .dropdown {
+        display: block !important;
+      }
+    }
+  </style>
 </head>
 <body>
 <header>
   <nav>
     <a href="{{ url_for('home') }}" class="logo">
-      <img src="{{ url_for('static', filename='images/logo.png') }}"
-     alt="Cyberprotek logo"
-     style="height:52px;width:auto;display:block;">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Cyberprotek logo" style="height:52px;width:auto;display:block;">
     </a>
     <div class="nav-links" id="navLinks">
       <a href="{{ url_for('home') }}" class="{{ 'active' if active=='home' else '' }}">Home</a>
       <div class="has-dropdown" id="servicesDropdown">
-        <a href="{{ url_for('services') }}" class="{{ 'active' if active=='services' else '' }}" onclick="if(window.innerWidth<=860){event.preventDefault();document.getElementById('servicesDropdown').classList.toggle('mobile-dropdown-open');}">Services ▾</a>
+        <a href="{{ url_for('services') }}" class="{{ 'active' if active=='services' else '' }}" id="servicesMenuLink">Services ▾</a>
         <div class="dropdown">
           {% for s in all_services %}
           <a href="{{ url_for('service_detail', slug=s.slug) }}">{{ s.short }}</a>
@@ -30,15 +99,9 @@
       <a href="{{ url_for('contact') }}" class="nav-cta mobile-cta" style="display:none;">Get a Free Consult</a>
     </div>
     <a href="{{ url_for('contact') }}" class="nav-cta">Get a Free Consult</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="var n=document.getElementById('navLinks');n.classList.toggle('mobile-open');this.textContent=n.classList.contains('mobile-open')?'✕':'☰';">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
   </nav>
 </header>
-
-<style>
-@media (max-width:860px){
-  .mobile-cta{display:block !important;margin-top:10px;text-align:center;}
-}
-</style>
 
 {% block content %}{% endblock %}
 
@@ -47,9 +110,7 @@
     <div class="footer-grid">
       <div>
         <div class="logo" style="margin-bottom:12px;">
-          <img src="{{ url_for('static', filename='images/logo.png') }}"
-     alt="Cyberprotek logo"
-     style="height:52px;width:auto;display:block;">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Cyberprotek logo" style="height:52px;width:auto;display:block;">
         </div>
         <p style="max-width:280px;color:#7E8B98;">Full-stack IT services and security testing for businesses that can't afford a guess.</p>
       </div>
@@ -79,30 +140,54 @@
     </div>
   </div>
 </footer>
+
+<!-- JavaScript Events handling mobile navigation and interaction -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const serviceLink = document.getElementById('servicesMenuLink');
+    const dropdownParent = document.getElementById('servicesDropdown');
 
-    const menuBtn = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    menuBtn.addEventListener('click', function() {
-        navLinks.classList.toggle('mobile-open');
-    });
-
-    if (window.innerWidth <= 860) {
-
-        const serviceLink = document.querySelector('.has-dropdown > a');
-        const dropdownParent = document.querySelector('.has-dropdown');
-
-        serviceLink.addEventListener('click', function(e) {
-
-            e.preventDefault();
-
-            dropdownParent.classList.toggle('mobile-dropdown-open');
-
+    // Toggle main navigation drawer on mobile viewports
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navLinks.classList.toggle('mobile-open');
+            
+            // Toggle visual state of the trigger button
+            if (navLinks.classList.contains('mobile-open')) {
+                menuBtn.textContent = '✕';
+            } else {
+                menuBtn.textContent = '☰';
+            }
         });
     }
 
+    // Toggle sub-navigation items on mobile viewports
+    if (serviceLink && dropdownParent) {
+        serviceLink.addEventListener('click', function(e) {
+            if (window.innerWidth <= 860) {
+                e.preventDefault(); 
+                e.stopPropagation();
+                dropdownParent.classList.toggle('mobile-dropdown-open');
+            }
+        });
+    }
+
+    // Close the navigation list when clicking outside the boundary
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 860) {
+            if (navLinks && navLinks.classList.contains('mobile-open') && !navMenuContainsTarget(e.target)) {
+                navLinks.classList.remove('mobile-open');
+                if (menuBtn) menuBtn.textContent = '☰';
+            }
+        }
+    });
+
+    function navMenuContainsTarget(target) {
+        return navLinks.contains(target) || menuBtn.contains(target);
+    }
 });
 </script>
 </body>
